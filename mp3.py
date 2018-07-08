@@ -53,7 +53,7 @@ for song in songs:
     cprint("Current Song:{}".format(song), "green")
     url = youtubeSearch(song)
     if url is not "error":
-        cmd = 'youtube-dl.exe --extract-audio --audio-format mp3 ' + url
+        cmd = 'youtube-dl.exe --extract-audio --audio-format mp3 --audio-quality 0 ' + url
         try:
             os.system(cmd)
         except:
