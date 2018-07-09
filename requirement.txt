@@ -1,0 +1,3 @@
+pyfiglet
+beautifulsoup4
+termcolor
