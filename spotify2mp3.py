@@ -22,19 +22,19 @@ def youtubeSearch(text):
 error = []
 cprint(figlet_format('spotify2mp3'), 'cyan')
 
-# playlist_url = str(input("請輸入播放清單分享網址："))
-# split_url = playlist_url.split("/")
-# user_id = split_url[4]
-# playlist_id = split_url[6]
-# print("oauth token 獲取網址：https://developer.spotify.com/console/get-playlist/")
-# oauth_token = str(input("請輸入token："))
-#
-# curl_cmd = ('curl -X "GET" "https://api.spotify.com/v1/users/{}/playlists/{}/tracks"'
-#             ' -H "Accept: application/json" -H "Content-Type: application/json"'
-#             ' -H "Authorization: Bearer {}" > api.json').format(user_id, playlist_id, oauth_token)
-# print("取得歌曲中...")
-# print(curl_cmd)
-# os.system(curl_cmd)
+playlist_url = str(input("請輸入播放清單分享網址："))
+split_url = playlist_url.split("/")
+user_id = split_url[4]
+playlist_id = split_url[6]
+print("oauth token 獲取網址：https://developer.spotify.com/console/get-playlist/")
+oauth_token = str(input("請輸入token："))
+
+curl_cmd = ('curl -X "GET" "https://api.spotify.com/v1/users/{}/playlists/{}/tracks"'
+            ' -H "Accept: application/json" -H "Content-Type: application/json"'
+            ' -H "Authorization: Bearer {}" > api.json').format(user_id, playlist_id, oauth_token)
+print("取得歌曲中...")
+print(curl_cmd)
+os.system(curl_cmd)
 
 file = open("api.json", "r", encoding='UTF-8')
 raw_text = file.read()
@@ -43,31 +43,31 @@ file.close()
 
 n = 0
 songs = []
-# try:
-for track in data['tracks']['items']:
-    # print(track)
-    if n == 0:
-        artists = track['track']['artists'][0]['name']
-    name = track['track']['name']
-    song = str(artists + '-' + name)
-    songs.append(song)
-print("此播放清單共有{}首歌".format(len(songs)))
-# except:
-#     print("此token已過期，請到 https://developer.spotify.com/console/get-playlist-tracks 來重新認證")
+try:
+    for track in data['tracks']['items']:
+        print(track)
+        if n == 0:
+            artists = track['track']['artists'][0]['name']
+        name = track['track']['name']
+        song = str(artists + '-' + name)
+        songs.append(song)
+    print("此播放清單共有{}首歌".format(len(songs)))
+except:
+    print("此token已過期，請到 https://developer.spotify.com/console/get-playlist-tracks 來重新認證")
 
 
-# else:
-for song in songs:
-    cprint("下載歌曲:{}".format(song), "green")
-    url = youtubeSearch(song)
-    if url is not "error":
-        cmd = 'youtube-dl.exe --extract-audio --audio-format mp3 --audio-quality 0 ' + url
-        try:
-            os.system(cmd)
-        except:
-            error.append(song)
+else:
+    for song in songs:
+        cprint("下載歌曲:{}".format(song), "green")
+        url = youtubeSearch(song)
+        if url is not "error":
+            cmd = 'youtube-dl.exe --extract-audio --audio-format mp3 --audio-quality 0 ' + url
+            try:
+                os.system(cmd)
+            except:
+                error.append(song)
 
-cprint("歌曲下載完畢", "green")
-print("未成功下載：")
-for item in error:
-    print(item)
+    cprint("歌曲下載完畢", "green")
+    print("未成功下載：")
+    for item in error:
+        print(item)
