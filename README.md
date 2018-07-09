@@ -22,7 +22,7 @@ https://open.spotify.com/user/stmpdrcrds/playlist/1OIzwJTbrOeZTHvUXf5yMg?si=4WPr
 `playlist_id` 就是playlist到 ? 之間的 `1OIzwJTbrOeZTHvUXf5yMg`
 
 ![image](https://i.imgur.com/TMw93tc.png)
-進入 https://developer.spotify.com/console/get-playlist-tracks，並將 user_id 及 playlist_id 填入欄位
+進入 https://developer.spotify.com/console/get-playlist-tracks, 並將 user_id 及 playlist_id 填入欄位
 
 填入點選綠色的 GET TOKEN 按鈕依照指示完成後
 
